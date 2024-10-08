@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 import models
@@ -38,7 +39,3 @@ def create_book_for_author(db: Session, book: schemas.BookCreate, author_id: int
     db.commit()
     db.refresh(db_book)
     return db_book
-
-
-def get_books_by_author(db: Session, author_id: int):
-    return db.query(models.Book).filter(models.Book.author_id == author_id).all()
